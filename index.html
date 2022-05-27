@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+
+        }
+        p {
+    margin-top: 1vh;
+    font-size: 13px;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+section{
+    background-color: rgb(97, 118, 118);
+    height: 40vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr  1fr ;
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding-bottom: 2vw;
+    background: url("https://assets.nflxext.com/ffe/siteui/vlv3/970e664f-2df4-47ce-b4fa-446082f5abc1/ccc3a1f7-2180-4f51-aa75-f9e9196c478b/IN-en-20220523-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+   opacity: 0.8;
+   
+    
+}
+div{
+    text-align: center;
+    
+}
+input{
+    color: brown;
+    height: 4vw;
+    margin-top: 1vw;
+    width: 38vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-size: 23px;
+    background-color: antiquewhite;
+
+}
+button{
+    font-size: 18px;
+    margin-top:15px;
+    height: 50px;
+    width: 20vw;
+    background-color: rgb(121, 103, 96);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 2vw;
+}
+button:hover{
+    background-color: rgb(209, 133, 133);
+    cursor: pointer;
+}
+#p{
+    font-size: 55px;
+    color: cadetblue;
+    margin-bottom: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+}
+body{
+    background-color: beige;
+}
+#div {
+    margin: 1vw 0vw 0vw 2vw;
+    /* border-radius: 5vw; */
+    border-radius: 10px;
+    margin-bottom: 5vw;
+    display: flex;
+    background-color: rgb(220, 240, 255);
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    height: 405px;
+    width: 1000px;
+    opacity: 0.9;
+}
+#div:hover{
+    cursor: pointer;
+    background-color: rgb(136, 133, 139);
+}
+nav{
+    background-color: gray;
+    height: 4vh;
+    font-size: 30px;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#nav{
+font-size: 20px ;
+position: relative;
+bottom: 8px;
+}
+img {
+   
+    margin-top: 0vw;
+    height: 405px;
+    width: 530px;
+    border-radius: 15px;
+    margin-right: 7vw;
+
+}
+#container{
+    margin: 1vw 0vw 0vw 2vw;
+    /* border-radius: 5vw; */
+    border-radius: 10px;
+    margin-bottom: 5vw;
+    
+    background-color: rgb(220, 240, 255);
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    height: 405px;
+    width: 259px;
+    margin-left: 50px;
+
+}
+#wrong{
+    
+   
+    height: 406px;
+    width: 288px;
+opacity: 0.8;
+
+}
+
+
+#first{
+    margin-top: 2vw;
+font-size: 25px;
+}
+#second{
+font-size: 20px;
+margin-top: 35px;
+
+}
+#third{
+    font-size: 20px;
+margin-top: 35px;
+}
+#fourth{
+font-size: 20px;
+margin-top: 35px;
+}
+#navv{
+    font-size: 20px;
+margin-top: 35px; 
+}
+    </style>
+</head>
+<body>
+    <nav>Results-<p id="nav"></p></nav>
+    <section>
+
+    </section>
+<div>
+    <p id="p">Search The Movie</p>
+    <input id="text" type="text"/><br>
+    <button id="btn">Search</button>
+</div>
+</body>
+</html>
+<script>
+    
+document.getElementById("btn").addEventListener("click",runprogram);
+function runprogram(){
+    var value = document.querySelector("#text").value;
+
+    if(value != ""){
+
+    
+
+    var data = "2ddcb06c"
+// var url = "http://www.omdbapi.com/?i=tt3896198&apikey=2ddcb06c";
+var url = `http://www.omdbapi.com/?t=${value}&apikey=${data}`
+// console.log(url)
+// http://www.omdbapi.com/?apikey=[yourkey]&
+
+
+let out = fetch(url).then(function(res){
+return res.json();
+
+}).then(function(res){
+    // console.log(res)
+})
+.catch(function(err){
+    // console.log(err);
+    // foundNot()
+   
+
+});
+// console.log(out);
+getData();
+let users;
+
+// Async await
+async function getData(){
+
+    try{
+        let res = await fetch(url);
+    let users = await res.json();
+
+
+
+    if(users.Response === "False" ){
+        console.log(users);
+   
+    users.img = "https://media.giphy.com/media/YyKPbc5OOTSQE/giphy.gif";
+    var arr = [];
+    arr.push(users);
+    console.log(arr);
+     worong(arr);
+
+    
+    }
+else{
+    console.log(users);
+    var arr = [];
+    arr.push(users)
+    append(arr);
+}
+  
+    
+     
+    }
+    catch(err){
+      
+   
+
+
+
+
+//         Error: "Movie not found!"
+// Response: "False"
+
+  
+    
+
+    }
+  
+}
+
+}
+
+}
+
+
+
+let i = 0;
+
+function append(users){
+ 
+
+
+users.forEach(function(elem){
+    document.querySelector("section").innerText = null
+
+    i++;
+    var nav = document.querySelector("#nav").innerText = i;
+
+  var nav1=  document.createElement("p");
+  nav1.setAttribute("id","navv");
+  nav1.innerText ="Imd Rating"+ elem.imdbRating;
+  var div = document.createElement("div");
+ 
+  div.setAttribute("id","div")
+  var img = document.createElement("img");
+  img.src = elem.Poster;
+  var p1 = document.createElement("p");
+  p1.setAttribute("id","first")
+  
+  p1.innerText ="Title:"+elem.Title;
+
+  var p2 = document.createElement("p");
+  p2.setAttribute("id","second")
+
+  p2.innerText ="Date/year;"+elem.Released +" "+ elem.Year;
+
+  var p3 = document.createElement("p");
+  p3.setAttribute("id","third")
+
+  p3.innerText ="Language:"+elem.Language;
+  var p4 = document.createElement("p");
+  p4.innerText ="Genre:"+elem.Genre;
+  p4.setAttribute("id","fourth")
+
+var box1 = document.createElement("div");
+var box2 = document.createElement("div");
+box1.append(img);
+box2.append(p1,p3,p4,p2,nav1)
+  div.append(box1,box2);
+
+
+      document.querySelector("section").append(div);
+
+
+  });
+
+
+}
+
+function worong(users){
+//   console.log(arr)
+users.forEach(function(elem){
+    var img = document.createElement("img");
+img.src = elem.img;
+img.setAttribute("id","wrong")
+var p1 = document.createElement("p");
+p1.innerText = elem.Response;
+p1.setAttribute("id","p1")
+var p2 = document.createElement("p");
+p2.setAttribute("id","p2")
+p2.innerText = elem.Error
+    var div = document.createElement("div");
+    div.setAttribute("id","container")
+    div.setAttribute("id","div1");
+    div.append(img);
+
+    document.querySelector("section").append(div);
+})
+   
+}
+
+
+</script>
+
